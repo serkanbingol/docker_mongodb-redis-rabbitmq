@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  dev_rabbitmq:
+    image: rabbitmq:3-management
+    container_name: dev_mongo_rabbitmq
+    restart: on-failure
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - ./mongo_rabbitmq_volume:/var/lib/rabbitmq
+  dev_redis:
+    image: redis
+    container_name: dev_mongo_redis
+    restart: on-failure
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"  
+    volumes:
+      - ./mongo_redis_volume:/data
+  
+  dev_mongodb:
+    image: mongo:latest
+    container_name: "dev_mongo_mongodb"
+    environment:
+      - MONGODB_USER="user" 
+      - MONGODB_PASS="pass"
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./mongo_mongodb_volume:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null 
