@@ -20,7 +20,7 @@
 
 **Check containers status**
 
-- After containers is up run "**docker containers ls**" to see their status
+- After containers is up, run "**docker container ls**" to see their status
 - run "**telnet localhost 5672**" , "**telnet localhost  15672**"  , "**telnet localhost 6379**" ,"**telnet localhost 27017**"  to get response from containers
 
 ## Compose Up Sample Screencast
